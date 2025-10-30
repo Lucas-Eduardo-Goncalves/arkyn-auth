@@ -1,6 +1,6 @@
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -10,13 +10,12 @@ datasource db {
 }
 
 model User {
-  id                        String               @id
-  email                     String               @unique
-  name                      String
-  avatarUrl                 String
-  utc                       Int
-  password                  String
-  createdAt                 DateTime
-  updatedAt                 DateTime
+  id        String   @id
+  email     String   @unique
+  name      String
+  avatarUrl String
+  utc       Int
+  password  String
+  createdAt DateTime
+  updatedAt DateTime
 }
-
