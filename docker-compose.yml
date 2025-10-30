@@ -2,7 +2,7 @@ services:
   app:
     build: .
     command: bun run start
-    container_name: app
+    container_name: auth-app
     hostname: container-1
     networks:
       - balancer-auth
@@ -11,7 +11,7 @@ services:
 
   nginx:
     image: nginx:stable
-    container_name: nginx-balancer
+    container_name: nginx-auth-balancer
     depends_on:
       - app
     volumes:
