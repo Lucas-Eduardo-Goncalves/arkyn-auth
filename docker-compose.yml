@@ -5,7 +5,7 @@ services:
     container_name: app
     hostname: container-1
     networks:
-      - balancer-net
+      - balancer-auth
     env_file:
       - .env
 
@@ -21,8 +21,8 @@ services:
     ports:
       - "8080:80"
     networks:
-      - balancer-net
+      - balancer-auth
 
 networks:
-  balancer-net:
+  balancer-auth:
     driver: bridge
