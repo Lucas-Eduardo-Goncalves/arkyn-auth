@@ -1,7 +1,7 @@
 {
   "name": "@arkyn/auth",
   "version": "1.0.0",
-  "description": "API for Arkyn's authentication system.",
+  "description": "User authentication and control service.",
   "type": "module",
   "license": "Apache-2.0",
   "author": "Arkyn | Lucas Gonçalves",
