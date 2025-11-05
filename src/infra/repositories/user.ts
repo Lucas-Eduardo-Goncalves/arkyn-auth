@@ -4,7 +4,7 @@ import { User } from "../../domain/entities/user";
 import { UserRepository } from "../../domain/repositories/user";
 import { databaseConnection } from "../../infra/adapters/dbAdapter";
 import { UserMapper } from "../mappers/user";
-import { cache } from "../services/cache";
+import { CacheService } from "../services/cache";
 
 class PrismaUserRepository implements UserRepository {
   async findAll(searchParams: UserSearchParams): Promise<SearchResult<User>> {
@@ -26,7 +26,7 @@ class PrismaUserRepository implements UserRepository {
   }
 
   async findById(userId: string): Promise<User | null> {
-    const cachedUser = cache.get<User>(`user_${userId}`);
+    const cachedUser = CacheService.get<User>(`user_${userId}`);
     if (cachedUser) return UserMapper.toEntity(cachedUser);
 
     const user = await databaseConnection.user.findUnique({
@@ -35,7 +35,7 @@ class PrismaUserRepository implements UserRepository {
 
     if (!user) return null;
 
-    cache.set(`user_${userId}`, user);
+    CacheService.set(`user_${userId}`, user);
     return UserMapper.toEntity(user);
   }
 
