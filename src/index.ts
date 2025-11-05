@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { hostname } from "os";
-import { version } from "../package.json";
+import { name, version } from "../package.json";
 
 import { RouteAdapter } from "./infra/adapters/routeAdapter";
 import { environmentVariables } from "./main/config/environmentVariables";
@@ -13,9 +13,10 @@ const { adaptRoute } = new RouteAdapter();
 
 app.use("*", (c, next) => RouteLogMiddleware.logRoute(c, next));
 
-app.get("/health-check", (c) =>
-  c.text(`Container: ${hostname()} - Service is healthy on version ${version}`)
-);
+app.get("/health-check", (c) => {
+  const message = `Service ${name} is healthy on container ${hostname()} using version ${version}`;
+  return c.text(message);
+});
 
 app.post("/auth", async (c) => await adaptRoute(c, authUser.handle));
 app.route("/users", userRoutes);
