@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 
 import { RouteAdapter } from "../../infra/adapters/routeAdapter";
-import { validateUserId } from "../factory/user/authUserFactory copy";
 import { createUser } from "../factory/user/createUserFactory";
 import { deleteUser } from "../factory/user/deleteUserFactory";
 import { listUsers } from "../factory/user/listUsersFactory";
 import { updateUser } from "../factory/user/updateUserFactory";
+import { validateUserId } from "../factory/user/validateUserIdFactory";
 
 const userRoutes = new Hono();
 const { adaptRoute } = new RouteAdapter();

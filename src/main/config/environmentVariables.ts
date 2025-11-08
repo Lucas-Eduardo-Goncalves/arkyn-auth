@@ -8,19 +8,12 @@ class EnvError extends Error {
 }
 
 const environmentVariablesSchema = z.object({
-  // JWT KEY
-  JWT_KEY: z.string().min(1),
-
-  // DATABASE URL
+  // Database config
   DATABASE_URL: z.string().url(),
   DIRECT_URL: z.string().url(),
 
-  // REDIS
-  REDIS_PASSWORD: z.string().min(1),
-  REDIS_HOST: z.string().min(1),
-  REDIS_PORT: z.string().min(1).transform(Number),
-
-  // PORT
+  // Config
+  JWT_KEY: z.string().min(1),
   PORT: z.string().min(4).regex(/^\d+$/).transform(Number),
 });
 

@@ -14,15 +14,10 @@ class UpdateUserUseCase {
     const { name, utc, userId } = input;
 
     const user = await this.userRepository.findById(userId);
-
-    if (!user) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("User not found");
-    }
+    if (!user) throw HttpAdapter.notFound("User not found");
 
     if (user.id !== userId) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.unauthorized("You do not own this user");
+      throw HttpAdapter.unauthorized("You do not own this user");
     }
 
     user.update({ name, utc });

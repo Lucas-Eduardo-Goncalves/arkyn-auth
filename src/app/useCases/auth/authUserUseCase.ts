@@ -15,20 +15,12 @@ class AuthUserUseCase {
     const { email, password } = input;
 
     const existsUser = await this.userRepository.findByEmail(email);
+    if (!existsUser) throw HttpAdapter.notFound("User not found");
 
-    if (!existsUser) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("User not found");
-    }
+    await PasswordAdapter.verify(existsUser.password, password);
+    const token = await JwtAdapter.sign(existsUser);
 
-    const passwordAdapter = new PasswordAdapter();
-    await passwordAdapter.verify(existsUser.password, password);
-
-    const tokenAdapter = new JwtAdapter();
-    return {
-      ...existsUser.toJson(),
-      token: await tokenAdapter.sign(existsUser),
-    };
+    return { ...existsUser.toJson(), token };
   }
 }
 

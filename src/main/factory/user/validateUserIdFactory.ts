@@ -3,9 +3,7 @@ import { ValidateUserIdUseCase } from "../../../app/useCases/user/validateUserId
 import { ValidateUserIdController } from "../../../infra/controllers/user/validateUserIdController";
 
 const prismaUserRepository = new PrismaUserRepository();
-
 const validateUserIdUseCase = new ValidateUserIdUseCase(prismaUserRepository);
-
 const validateUserIdController = new ValidateUserIdController(
   validateUserIdUseCase
 );

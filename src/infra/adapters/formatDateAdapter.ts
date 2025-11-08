@@ -5,7 +5,7 @@ class FormatDateAdapter {
     return formatDate(
       date.toISOString().split("T"),
       "isoDate",
-      "MM/DD/YYYY at hh:mm:ss"
+      "MM-DD-YYYY at hh:mm:ss"
     );
   }
 

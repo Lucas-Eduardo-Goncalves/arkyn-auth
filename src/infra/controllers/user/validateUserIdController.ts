@@ -1,6 +1,6 @@
 import { ValidateUserIdUseCase } from "../../../app/useCases/user/validateUserIdUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
-import { RouteDTO } from "../../../main/types/RouteDTO";
+import { RouteDTO } from "../../../main/types/routeDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 
 class ValidateUserIdController {
@@ -10,7 +10,7 @@ class ValidateUserIdController {
     try {
       const { userId } = await AuthMiddleware.authenticate(route);
       await this.validateUserIdUseCase.execute({ userId });
-      return route.response.json({ userId }, 201);
+      return route.response.json(null, 204);
     } catch (error) {
       return ErrorHandlerAdapter.handle(error);
     }

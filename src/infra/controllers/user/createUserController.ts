@@ -1,8 +1,8 @@
 import { CreateUserUseCase } from "../../../app/useCases/user/createUserUseCase";
-import { RouteDTO } from "../../../main/types/RouteDTO";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
+import { RouteDTO } from "../../../main/types/routeDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createUserSchema } from "../../schemas/internal/user";
 
 class CreateUserController {
@@ -10,7 +10,7 @@ class CreateUserController {
 
   async handle(route: RouteDTO) {
     try {
-      // await AuthMiddleware.authenticate(route);
+      await AuthMiddleware.authenticate(route);
       const body = route.request.body;
 
       const schemaValidator = new SchemaValidatorAdapter(createUserSchema);

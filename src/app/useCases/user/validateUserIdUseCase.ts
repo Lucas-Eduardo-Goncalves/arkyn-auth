@@ -12,11 +12,7 @@ class ValidateUserIdUseCase {
     const { userId } = input;
 
     const existsUser = await this.userRepository.findById(userId);
-
-    if (!existsUser) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("User not found");
-    }
+    if (!existsUser) throw HttpAdapter.notFound("User not found");
   }
 }
 

@@ -1,8 +1,8 @@
 import { DeleteUserUseCase } from "../../../app/useCases/user/deleteUserUseCase";
-import { RouteDTO } from "../../../main/types/RouteDTO";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
+import { RouteDTO } from "../../../main/types/routeDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { deleteUserSchema } from "../../schemas/internal/user";
 
 class DeleteUserController {
@@ -16,8 +16,8 @@ class DeleteUserController {
       const schemaValidator = new SchemaValidatorAdapter(deleteUserSchema);
       const validatedBody = schemaValidator.validate({ userId });
 
-      const user = await this.deleteUserUseCase.execute(validatedBody.userId);
-      return route.response.json(user);
+      await this.deleteUserUseCase.execute(validatedBody.userId);
+      return route.response.json(null, 204);
     } catch (error) {
       return ErrorHandlerAdapter.handle(error);
     }

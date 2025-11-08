@@ -7,7 +7,7 @@ type RouteDTO = {
   };
 
   response: {
-    json: (data: any, status?: number) => any;
+    json: (data: any, status: number) => any;
   };
 };
 

@@ -1,11 +1,9 @@
+import { AuthUserUseCase } from "../../../app/useCases/auth/authUserUseCase";
+import { AuthUserController } from "../../../infra/controllers/auth/authUserController";
 import { PrismaUserRepository } from "../../../infra/repositories/user";
-import { AuthUserUseCase } from "../../../app/useCases/user/authUserUseCase";
-import { AuthUserController } from "../../../infra/controllers/user/authUserController";
 
 const prismaUserRepository = new PrismaUserRepository();
-
 const authUserUseCase = new AuthUserUseCase(prismaUserRepository);
-
 const authUserController = new AuthUserController(authUserUseCase);
 
 const authUser = {

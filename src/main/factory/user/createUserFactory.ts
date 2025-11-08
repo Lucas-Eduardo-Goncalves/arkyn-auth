@@ -3,9 +3,7 @@ import { CreateUserUseCase } from "../../../app/useCases/user/createUserUseCase"
 import { CreateUserController } from "../../../infra/controllers/user/createUserController";
 
 const prismaUserRepository = new PrismaUserRepository();
-
 const createUserUseCase = new CreateUserUseCase(prismaUserRepository);
-
 const createUserController = new CreateUserController(createUserUseCase);
 
 const createUser = {

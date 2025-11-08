@@ -3,9 +3,7 @@ import { ListUsersUseCase } from "../../../app/useCases/user/listUsersUseCase";
 import { ListUsersController } from "../../../infra/controllers/user/listUsersController";
 
 const prismaUserRepository = new PrismaUserRepository();
-
 const listUsersUseCase = new ListUsersUseCase(prismaUserRepository);
-
 const listUsersController = new ListUsersController(listUsersUseCase);
 
 const listUsers = {

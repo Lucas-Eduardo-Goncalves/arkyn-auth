@@ -5,27 +5,23 @@ import { environmentVariables } from "../../main/config/environmentVariables";
 import { HttpAdapter } from "./httpAdapter";
 
 class JwtAdapter {
-  constructor() {}
-
-  async verify(rawToken: string) {
-    const httpAdapter = new HttpAdapter();
-
+  static async verify(bearerToken: string) {
     try {
       const secret = new TextEncoder().encode(environmentVariables.JWT_KEY);
-      const token = rawToken.replace("Bearer ", "");
+      const token = bearerToken.replace("Bearer ", "");
       const { payload } = await jwtVerify(token, secret);
       const userId = payload?.id;
 
       if (typeof userId !== "string") {
-        throw httpAdapter.unauthorized("Invalid token");
+        throw HttpAdapter.unauthorized("Invalid token");
       }
-      return { userId };
+      return { userId, token };
     } catch (error) {
-      throw httpAdapter.unauthorized("Invalid token");
+      throw HttpAdapter.unauthorized("Invalid token");
     }
   }
 
-  async sign(user: User) {
+  static async sign(user: User) {
     const alg = "HS256";
     const secret = new TextEncoder().encode(environmentVariables.JWT_KEY);
     const token = await new SignJWT({ id: user.id })

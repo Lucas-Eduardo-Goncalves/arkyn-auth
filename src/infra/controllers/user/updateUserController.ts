@@ -1,8 +1,8 @@
 import { UpdateUserUseCase } from "../../../app/useCases/user/updateUserUseCase";
-import { RouteDTO } from "../../../main/types/RouteDTO";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
+import { RouteDTO } from "../../../main/types/routeDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { updateUserSchema } from "../../schemas/internal/user";
 
 class UpdateUserController {
@@ -20,7 +20,7 @@ class UpdateUserController {
       const data = schemaValidator.validate({ ...body, userId });
       const user = await this.updateUserUseCase.execute(data);
 
-      return route.response.json(user);
+      return route.response.json(user, 200);
     } catch (error) {
       return ErrorHandlerAdapter.handle(error);
     }

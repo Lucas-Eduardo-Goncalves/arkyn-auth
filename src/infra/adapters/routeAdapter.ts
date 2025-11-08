@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { RouteDTO } from "../../main/types/RouteDTO";
+import { RouteDTO } from "../../main/types/routeDTO";
 
 type Route = (rawRoute: RouteDTO) => Promise<any>;
 

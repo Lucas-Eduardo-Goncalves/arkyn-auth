@@ -1,4 +1,4 @@
-import { RouteDTO } from "../../main/types/RouteDTO";
+import { RouteDTO } from "../../main/types/routeDTO";
 
 type ToObjectInputProps = {
   params: RouteDTO["request"]["params"];

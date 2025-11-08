@@ -4,13 +4,12 @@ import { UserRepository } from "../../../domain/repositories/user";
 class DeleteUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
-  async execute(id: string) {
-    const user = await this.userRepository.findById(id);
+  async execute(userId: string) {
+    const user = await this.userRepository.findById(userId);
+    if (!user) throw HttpAdapter.notFound("User not found");
 
-    if (!user) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("User not found");
-    }
+    if (user.id !== userId)
+      throw HttpAdapter.unauthorized("You do not own this user");
 
     await this.userRepository.deleteUser(user.id);
   }
