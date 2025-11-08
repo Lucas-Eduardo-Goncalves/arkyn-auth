@@ -1,7 +1,8 @@
 import { formatDate } from "@arkyn/shared";
 
 class FormatDateAdapter {
-  static format(date: Date): string {
+  static format(date: Date, utc: number): string {
+    date.setHours(date.getHours() + utc);
     return formatDate(
       date.toISOString().split("T"),
       "isoDate",

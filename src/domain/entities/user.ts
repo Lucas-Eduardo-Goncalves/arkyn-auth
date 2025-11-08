@@ -2,6 +2,8 @@ import { AvatarAdapter } from "../../infra/adapters/avatarAdapter";
 import { FormatDateAdapter } from "../../infra/adapters/formatDateAdapter";
 import { IdAdapter } from "../../infra/adapters/idAdapter";
 
+type UserRole = "admin" | "user";
+
 type ConstructorProps = {
   id: string;
   name: string;
@@ -9,6 +11,7 @@ type ConstructorProps = {
   email: string;
   password: string;
   utc: number;
+  role: UserRole;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -35,6 +38,7 @@ class User {
   email: string;
   password: string;
   utc: number;
+  role: UserRole;
   createdAt: Date;
   updatedAt: Date;
 
@@ -45,6 +49,7 @@ class User {
     this.email = props.email;
     this.password = props.password;
     this.utc = props.utc;
+    this.role = props.role;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
   }
@@ -57,6 +62,7 @@ class User {
       email: props.email,
       password: props.password,
       utc: props.utc,
+      role: "user",
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -70,6 +76,7 @@ class User {
       email: props.email,
       password: props.password,
       utc: props.utc,
+      role: props.role,
       createdAt: props.createdAt,
       updatedAt: props.updatedAt,
     });
@@ -92,10 +99,11 @@ class User {
       avatarUrl: this.avatarUrl,
       email: this.email,
       utc: this.utc,
-      createdAt: FormatDateAdapter.format(this.createdAt),
-      updatedAt: FormatDateAdapter.format(this.updatedAt),
+      role: this.role,
+      createdAt: FormatDateAdapter.format(this.createdAt, this.utc),
+      updatedAt: FormatDateAdapter.format(this.updatedAt, this.utc),
     };
   }
 }
 
-export { User };
+export { User, UserRole };

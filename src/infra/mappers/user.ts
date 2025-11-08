@@ -1,4 +1,4 @@
-import { User } from "../../domain/entities/user";
+import { User, UserRole } from "../../domain/entities/user";
 
 type UserMapperDTO = {
   id: string;
@@ -7,6 +7,7 @@ type UserMapperDTO = {
   avatarUrl: string;
   password: string;
   utc: number;
+  role: UserRole;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -20,6 +21,7 @@ class UserMapper {
       email: user.email,
       password: user.password,
       utc: user.utc,
+      role: user.role,
       createdAt: new Date(user.createdAt),
       updatedAt: new Date(user.updatedAt),
     });
