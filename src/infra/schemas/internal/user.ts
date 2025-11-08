@@ -23,7 +23,10 @@ const deleteUserSchema = z.object({
   userId: z.string().uuid("Invalid id format"),
 });
 
-const listUsersSchema = paginationSchema;
+const listUsersSchema = paginationSchema.extend({
+  name: z.string().min(1, "Name must be at least 1 character").optional(),
+  sort: z.enum(["createdAt", "name", "updatedAt"]).optional(),
+});
 
 export {
   authUserSchema,

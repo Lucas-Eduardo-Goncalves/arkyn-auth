@@ -18,4 +18,6 @@ model User {
   password  String
   createdAt DateTime
   updatedAt DateTime
+
+  @@index([name, createdAt, updatedAt])
 }

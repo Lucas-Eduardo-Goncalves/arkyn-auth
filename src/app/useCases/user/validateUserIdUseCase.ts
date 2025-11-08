@@ -10,7 +10,6 @@ class ValidateUserIdUseCase {
 
   async execute(input: InputProps) {
     const { userId } = input;
-
     const existsUser = await this.userRepository.findById(userId);
     if (!existsUser) throw HttpAdapter.notFound("User not found");
   }

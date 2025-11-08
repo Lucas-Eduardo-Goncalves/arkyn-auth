@@ -7,7 +7,9 @@ type InputProps = {
   sort?: string | null;
   sortDirection?: "asc" | "desc";
 
-  filter: {};
+  filter: {
+    name?: string;
+  };
 };
 
 class ListUsersUseCase {
@@ -15,6 +17,8 @@ class ListUsersUseCase {
 
   async execute(input: InputProps) {
     const searchParams = new UserSearchParams(input);
+    searchParams.setBaseSorting();
+
     const users = await this.userRepository.findAll(searchParams);
     return users.toJson();
   }
