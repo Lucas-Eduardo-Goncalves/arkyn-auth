@@ -8,11 +8,11 @@ class EnvError extends Error {
 }
 
 const environmentVariablesSchema = z.object({
-  // Database config
+  // Database configurations
   DATABASE_URL: z.string().url(),
   DIRECT_URL: z.string().url(),
 
-  // Config
+  // Configurations
   JWT_KEY: z.string().min(1),
   PORT: z.string().min(4).regex(/^\d+$/).transform(Number),
 });
