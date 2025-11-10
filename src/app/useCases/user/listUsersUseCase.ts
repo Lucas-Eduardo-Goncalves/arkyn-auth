@@ -17,8 +17,6 @@ class ListUsersUseCase {
 
   async execute(input: InputProps) {
     const searchParams = new UserSearchParams(input);
-    searchParams.setBaseSorting();
-
     const users = await this.userRepository.findAll(searchParams);
     return users.toJson();
   }
