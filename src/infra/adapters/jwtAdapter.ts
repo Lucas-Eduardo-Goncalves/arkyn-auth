@@ -5,10 +5,10 @@ import { environmentVariables } from "../../main/config/environmentVariables";
 import { HttpAdapter } from "./httpAdapter";
 
 class JwtAdapter {
-  static async verify(bearerToken: string) {
+  static async verify(token: string) {
     try {
       const secret = new TextEncoder().encode(environmentVariables.JWT_KEY);
-      const token = bearerToken.replace("Bearer ", "");
+
       const { payload } = await jwtVerify(token, secret);
       const userId = payload?.id;
 
