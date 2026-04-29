@@ -92,6 +92,11 @@ class User {
     this.updatedAt = new Date();
   }
 
+  updatePassword(newPassword: string) {
+    this.password = newPassword;
+    this.updatedAt = new Date();
+  }
+
   toJson() {
     return {
       id: this.id,

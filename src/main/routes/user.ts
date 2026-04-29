@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 
 import { RouteAdapter } from "../../infra/adapters/routeAdapter";
+import { changeUserPassword } from "../factory/user/changeUserPasswordFactory";
 import { createUser } from "../factory/user/createUserFactory";
 import { deleteUser } from "../factory/user/deleteUserFactory";
 import { listUserByEmail } from "../factory/user/listUserByEmailFactory";
@@ -19,6 +20,10 @@ userRoutes.get("/email/:email", async (c) =>
 );
 userRoutes.post("/", async (c) => await adaptRoute(c, createUser.handle));
 userRoutes.put("/:userId", async (c) => await adaptRoute(c, updateUser.handle));
+userRoutes.put(
+  "/:userId/password",
+  async (c) => await adaptRoute(c, changeUserPassword.handle),
+);
 userRoutes.delete(
   "/:userId",
   async (c) => await adaptRoute(c, deleteUser.handle),

@@ -19,6 +19,14 @@ const updateUserSchema = z.object({
   utc: z.number().optional(),
 });
 
+const changeUserPasswordSchema = z.object({
+  userId: z.string().uuid("Invalid id format"),
+  currentPassword: z
+    .string()
+    .min(8, "Current password must be at least 8 characters"),
+  newPassword: z.string().min(8, "New password must be at least 8 characters"),
+});
+
 const deleteUserSchema = z.object({
   userId: z.string().uuid("Invalid id format"),
 });
@@ -30,6 +38,7 @@ const listUsersSchema = paginationSchema.extend({
 
 export {
   authUserSchema,
+  changeUserPasswordSchema,
   createUserSchema,
   deleteUserSchema,
   updateUserSchema,
