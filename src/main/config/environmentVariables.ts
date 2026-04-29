@@ -9,8 +9,7 @@ class EnvError extends Error {
 
 const environmentVariablesSchema = z.object({
   // Database configurations
-  DATABASE_URL: z.string().url(),
-  DIRECT_URL: z.string().url(),
+  DATABASE_URL: z.url(),
 
   // Configurations
   JWT_KEY: z.string().min(1),
@@ -20,7 +19,7 @@ const environmentVariablesSchema = z.object({
 function formatErrorMessage(error: z.ZodError) {
   const title = "Error validating env variables:";
   const lines = Object.entries(error.flatten().fieldErrors).map(
-    ([key, value]) => `-> ${key}: ${value}`
+    ([key, value]) => `-> ${key}: ${value}`,
   );
   return [title, ...lines].join("\n");
 }
