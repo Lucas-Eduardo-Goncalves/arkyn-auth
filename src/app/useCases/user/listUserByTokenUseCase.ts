@@ -1,6 +1,6 @@
 import { UserRepository } from "../../../domain/repositories/user";
 
-class ListUserUseCase {
+class ListUserByTokenUseCase {
   constructor(private userRepository: UserRepository) {}
 
   async execute(userId: string) {
@@ -11,4 +11,4 @@ class ListUserUseCase {
   }
 }
 
-export { ListUserUseCase };
+export { ListUserByTokenUseCase };

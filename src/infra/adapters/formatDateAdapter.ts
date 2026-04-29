@@ -5,8 +5,8 @@ class FormatDateAdapter {
     date.setHours(date.getHours() + utc);
     return formatDate(
       date.toISOString().split("T"),
-      "isoDate",
-      "MM-DD-YYYY at hh:mm:ss"
+      "timestamp",
+      "MM-DD-YYYY at hh:mm:ss",
     );
   }
 

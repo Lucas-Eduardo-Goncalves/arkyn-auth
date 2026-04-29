@@ -4,8 +4,8 @@ import { name, version } from "../package.json";
 
 import { environmentVariables } from "./main/config/environmentVariables";
 import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
-import { authRoutes } from "./main/routes/auth.routes";
-import { userRoutes } from "./main/routes/user.routes";
+import { authRoutes } from "./main/routes/auth";
+import { userRoutes } from "./main/routes/user";
 
 const app = new Hono();
 
